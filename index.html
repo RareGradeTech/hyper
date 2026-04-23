@@ -46,92 +46,106 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 }
 .shimmer-cat{height:90px;border-radius:var(--radius-sm)}
 .shimmer-card{flex:0 0 auto;width:148px;height:210px;border-radius:var(--radius-xs)}
+
 /* ── HEADER ── */
-.header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:6px 14px;height:var(--header-h);
-  background:var(--surface);
-  position:sticky;top:0;z-index:1000;
-  border-bottom:1px solid var(--border-light);gap:10px;
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; height: 72px;
+  background: var(--surface);
+  position: sticky; top: 0; z-index: 1000;
+  border-bottom: 1px solid var(--border-light); gap: 12px;
 }
-.header-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
-.back-btn{
-  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
-  background:transparent;border:none;border-radius:50%;
-  cursor:pointer;color:var(--text);flex-shrink:0;transition:var(--tr);text-decoration:none;
+.header-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+.back-btn {
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  background: var(--surface2); border: 1px solid var(--border-light); border-radius: 50%;
+  cursor: pointer; color: var(--text); flex-shrink: 0; transition: var(--tr); text-decoration: none;
 }
-.back-btn:active{background:var(--surface2);transform:scale(.9)}
-.back-btn i{width:20px;height:20px}
-.logo{height:32px;width:auto;object-fit:contain;display:block;border-radius:6px;}
-.header-title{
-  font-weight:700;font-size:1rem;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  display:flex;align-items:center;gap:7px;
+.back-btn:hover { background: var(--border-light); }
+.back-btn:active { transform: scale(.9); }
+.back-btn i { width: 18px; height: 18px; }
+.logo { height: 38px; width: auto; object-fit: contain; display: block; border-radius: 8px; }
+.header-title {
+  font-weight: 800; font-size: 1.05rem; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: flex; flex-direction: column; line-height: 1.2;
 }
-.store-badge{
-  font-size:.62rem;font-weight:800;padding:2px 8px;
-  background:var(--accent-light);color:var(--accent-dark);
-  border-radius:999px;border:1px solid rgba(5,150,105,.25);
-  text-transform:uppercase;letter-spacing:.3px;flex-shrink:0;
+.store-badge {
+  font-size: .65rem; font-weight: 700; color: var(--dim);
+  text-transform: uppercase; letter-spacing: .5px; display: flex; align-items: center; gap: 4px;
 }
-.header-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.action-btn{
-  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
-  background:transparent;border:none;border-radius:50%;
-  cursor:pointer;color:var(--text);position:relative;transition:var(--tr);
+.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.action-btn {
+  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+  background: #f8fafe; border: 1px solid var(--border-light); border-radius: 50%;
+  cursor: pointer; color: var(--text); position: relative; transition: var(--tr);
 }
-.action-btn:active{transform:scale(.9);background:var(--surface2)}
-.action-btn i{width:20px;height:20px}
-.cart-badge{
-  position:absolute;top:0;right:-2px;
-  background:var(--accent);color:white;
-  font-size:.6rem;font-weight:700;padding:1px 4px;
-  border-radius:8px;min-width:14px;text-align:center;
-  border:1.5px solid var(--surface);line-height:1.2;
-  animation:pulse 2s infinite;display:none;
+.action-btn:hover { background: var(--accent-light); color: var(--accent-dark); border-color: transparent; }
+.action-btn:active { transform: scale(.95); }
+.action-btn i { width: 20px; height: 20px; }
+.cart-badge {
+  position: absolute; top: -2px; right: -4px;
+  background: var(--danger); color: white;
+  font-size: .65rem; font-weight: 800; padding: 2px 5px;
+  border-radius: 10px; min-width: 18px; text-align: center;
+  border: 2px solid var(--surface); line-height: 1.2;
 }
-/* ── SEARCH ── */
-.search-section-bar{
-  padding:8px 14px;background:var(--surface);
-  border-bottom:1px solid var(--border-light);
-  display:none;animation:fadeSlideIn .25s ease;
+
+/* ── SEARCH (Always visible under header for better UX) ── */
+.search-section-bar {
+  padding: 12px 16px; background: var(--surface);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky; top: 72px; z-index: 999;
 }
-.search-wrap{
-  display:flex;align-items:center;gap:8px;
-  background:var(--surface2);border-radius:var(--radius-xs);
-  padding:8px 10px;border:1px solid var(--border-light);transition:var(--tr);
+.search-wrap {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface2); border-radius: var(--radius-sm);
+  padding: 12px 14px; border: 1px solid transparent; transition: var(--tr);
 }
-.search-wrap:focus-within{border-color:var(--accent);background:var(--surface);box-shadow:0 0 0 2px rgba(5,150,105,.1)}
-.search-wrap i{width:16px;height:16px;color:var(--dim);flex-shrink:0}
-.search-input{flex:1;border:none;background:transparent;font-family:inherit;font-size:.82rem;color:var(--text);outline:none}
-.search-input::placeholder{color:var(--dim)}
+.search-wrap:focus-within {
+  border-color: var(--accent); background: var(--surface);
+  box-shadow: 0 4px 14px rgba(5,150,105,.08);
+}
+.search-wrap i { width: 18px; height: 18px; color: var(--dim); flex-shrink: 0; }
+.search-input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: .9rem; color: var(--text); outline: none; font-weight: 500; }
+.search-input::placeholder { color: #9ca3af; font-weight: 400; }
+
 /* ── PAGE ── */
 .page{padding:0 0 130px}
-/* ── HERO ── */
-.hero{
-  background:linear-gradient(135deg,#064e3b 0%,#047857 45%,#059669 100%);
-  padding:26px 20px 28px;position:relative;overflow:hidden;
+
+/* ── HERO BANNER (Dribbble Style) ── */
+.hero-wrapper { padding: 16px; }
+.hero {
+  background: #ecfdf5; /* Light pastel green */
+  border-radius: 24px; padding: 28px 24px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: space-between;
+  border: 1px solid #d1fae5;
 }
-.hero::before{content:'';position:absolute;top:-50px;right:-30px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
-.hero::after{content:'';position:absolute;bottom:-60px;right:70px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.04)}
-.hero-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  background:rgba(255,255,255,.15);color:var(--accent-light);
-  border:1px solid rgba(209,250,229,.3);border-radius:999px;
-  padding:3px 10px;font-size:.68rem;font-weight:800;
-  text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;
+.hero::before { content: ''; position: absolute; top: -30px; right: -20px; width: 150px; height: 150px; border-radius: 50%; background: #d1fae5; opacity: 0.5; z-index: 1; }
+.hero::after { content: ''; position: absolute; bottom: -40px; right: 80px; width: 100px; height: 100px; border-radius: 50%; background: #a7f3d0; opacity: 0.4; z-index: 1; }
+.hero-inner { position: relative; z-index: 2; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.hero-content { flex: 1; max-width: 65%; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: white; color: var(--accent-dark);
+  border-radius: 999px; padding: 5px 12px; font-size: .7rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
-.hero-title{font-size:1.45rem;font-weight:900;color:white;letter-spacing:-.5px;line-height:1.25;margin-bottom:6px}
-.hero-sub{color:rgba(255,255,255,.68);font-size:.83rem;font-weight:500;margin-bottom:14px}
-.hero-chips{display:flex;gap:7px;flex-wrap:wrap}
-.hero-chip{
-  background:rgba(255,255,255,.12);color:white;
-  border:1px solid rgba(255,255,255,.2);border-radius:999px;
-  padding:4px 11px;font-size:.72rem;font-weight:600;
-  display:flex;align-items:center;gap:4px;
+.hero-title { font-size: 1.6rem; font-weight: 900; color: var(--text); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 8px; }
+.hero-title span { color: var(--accent); }
+.hero-sub { color: var(--text-secondary); font-size: .85rem; font-weight: 500; margin-bottom: 18px; line-height: 1.4; }
+.hero-btn {
+  background: var(--accent); color: white; border: none;
+  padding: 10px 20px; border-radius: 100px; font-family: inherit; font-weight: 700; font-size: .85rem;
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: var(--tr);
+  box-shadow: 0 4px 12px rgba(5,150,105,.25);
 }
-.hero-emoji{font-size:3.2rem;flex-shrink:0;filter:drop-shadow(0 4px 12px rgba(0,0,0,.2));transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.hero-btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
+.hero-btn i { width: 14px; height: 14px; }
+.hero-image-container { position: relative; z-index: 2; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.hero-emoji { font-size: 5.5rem; filter: drop-shadow(0 8px 16px rgba(0,0,0,.15)); transition: transform .4s cubic-bezier(.34,1.56,.64,1); line-height: 1; }
+
 /* ── SECTIONS ── */
 .section{padding:20px 14px 0}
 .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
@@ -476,6 +490,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 </style>
 </head>
 <body>
+
 <header class="header">
   <div class="header-left">
     <a href="index.html" class="back-btn" aria-label="Go back">
@@ -483,46 +498,48 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
     </a>
     <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/473018911_1144016671071744_3535488847925097727_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_eui2=AeGUeW4OMbFgWIHsxc6MEbLfyVanQYIENhfJVqdBggQ2F129W_kY5E8R48hfaupj-VUCWW9pMizIpOYeN0vUh9Jn&_nc_ohc=1lRbXXsrtfAQ7kNvwFtvoR5&_nc_oc=Adrli0V2q-O-3UPm0F-1gYiFmGekmOt_tm7o-KvtBqA1QyvLWeDmxWgdzNPyK4QygxY&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=HkCyI20b8-O2ZffqF1z3KQ&oh=00_Af1X6wCxIbBM01jlybOyk4nobvtJlzL5So492N84cD3T2w&oe=69EFE9F3" alt="Store Logo" class="logo">
     <div class="header-title">
-      <span>Grocery</span>
-      <span class="store-badge" id="storeBadge">All Stores</span>
+      1BUSKET
+      <span class="store-badge" id="storeBadge"><i data-lucide="map-pin" style="width:10px;height:10px;"></i> Grocery Delivery</span>
     </div>
   </div>
   <div class="header-actions">
-    <button class="action-btn" onclick="toggleSearch()" aria-label="Search">
-      <i data-lucide="search"></i>
-    </button>
     <button class="action-btn" onclick="toggleCart()" aria-label="Cart">
       <i data-lucide="shopping-bag"></i>
-      <span class="cart-badge" id="cartCount">0</span>
+      <span class="cart-badge" id="cartCount" style="display:none;">0</span>
     </button>
   </div>
 </header>
+
 <div class="search-section-bar" id="searchSectionBar">
   <div class="search-wrap">
     <i data-lucide="search"></i>
     <input type="text" class="search-input" id="searchInput"
-           placeholder="Search products, brands, categories…"
+           placeholder="Search fresh groceries, brands..."
            autocomplete="off" oninput="handleSearch(this.value)">
   </div>
 </div>
+
 <main class="page">
-  <div class="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-badge">
-          <i data-lucide="zap" style="width:10px;height:10px;"></i> Daily Deals
+  <div class="hero-wrapper">
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i data-lucide="truck" style="width:12px;height:12px;color:var(--accent);"></i> Fast Delivery
+          </div>
+          <h2 class="hero-title" id="heroTitle">Fresh & Healthy <span>Groceries</span></h2>
+          <p class="hero-sub">Get your favourite organic products delivered to your door in minutes.</p>
+          <button class="hero-btn" onclick="document.getElementById('catSection').scrollIntoView({behavior: 'smooth'})">
+            Shop Now <i data-lucide="arrow-right"></i>
+          </button>
         </div>
-        <h2 class="hero-title" id="heroTitle">Fresh Groceries<br>Delivered Fast</h2>
-        <p class="hero-sub">Shop your favourite products and get them delivered in minutes.</p>
-        <div class="hero-chips">
-          <div class="hero-chip"><i data-lucide="clock" style="width:11px;height:11px;"></i> 15–30 min</div>
-          <div class="hero-chip"><i data-lucide="shield-check" style="width:11px;height:11px;"></i> Fresh &amp; cold</div>
-          <div class="hero-chip"><i data-lucide="tag" style="width:11px;height:11px;"></i> Store prices</div>
+        <div class="hero-image-container">
+          <div class="hero-emoji" id="heroEmoji">🛒</div>
         </div>
       </div>
-      <div class="hero-emoji" id="heroEmoji">🛒</div>
     </div>
   </div>
+
   <div class="section" id="catSection">
     <div class="section-head">
       <div class="section-title"><span class="sec-icon">🏪</span> Shop by Category</div>
@@ -754,7 +771,6 @@ let sheetQty = 1;
 let activeVendorId = null;
 let activeVendorName = null;
 let userLocation = { lat: null, lng: null, address: null };
-// Checkout state (mirrors index.html)
 let coStep = 0;
 let selectedPayment = 'cash';
 let coDeliveryAddress = null;
@@ -1021,7 +1037,6 @@ function renderCoReview(body, footer){
       </div>
     </div>
   `;
-  // ── CHANGED: "Continue to Payment" now redirects to payment.html with full cart data ──
   footer.innerHTML = `<button class="co-confirm-btn" onclick="goToPaymentPage()"><i data-lucide="arrow-right"></i> Continue to Payment</button>`;
 }
 function renderCoPayment(body, footer){
@@ -1111,7 +1126,6 @@ window.selectPayment = id => {
 window.coGoNext = ()=>{
   coAnimDir = 'forward'; coStep = 1; renderCoStep(); lucide.createIcons();
 };
-/* ── NEW FUNCTION: Redirect to payment.html with full cart data ── */
 window.goToPaymentPage = function(){
   const totalItems = getTotalItems();
   if(totalItems === 0){
@@ -1122,13 +1136,11 @@ window.goToPaymentPage = function(){
     showToast("Please sign in to continue");
     return;
   }
-  // Save complete cart data + metadata to localStorage so payment.html can read it instantly
   localStorage.setItem('checkoutCartGroups', JSON.stringify(cartGroups));
   localStorage.setItem('checkoutTotalItems', totalItems.toString());
   localStorage.setItem('checkoutTotalPrice', getTotalPrice().toFixed(2));
   localStorage.setItem('checkoutUserId', currentUserId);
   localStorage.setItem('checkoutTimestamp', Date.now().toString());
-  // Redirect to payment page (all cart data is now available in localStorage)
   window.location.href = 'payment.html';
 };
 function renderCoSuccess(body, footer, snapshottedItems, snapshottedTotal, snapshottedOrderId){
@@ -1169,10 +1181,7 @@ window.dismissCheckout = ()=>{
   allProducts.forEach(p => refreshAction(p.id));
   showToast('🎉 Order placed! Track it in your orders.');
 };
-/* ── HANDLE CHECKOUT — writes one order per vendor to:
-     orders/{newKey} ← global orders list (same as index.html)
-     vendors/{vendorId}/orders/{newKey} ← vendor-specific node (visible in vendor dash)
-── */
+/* ── HANDLE CHECKOUT ── */
 window.handleCheckout = async()=>{
   if(!currentUser){ showToast("Please sign in to place an order"); return; }
   if(getTotalItems() === 0){ showToast("Cart is empty"); return; }
@@ -1193,7 +1202,6 @@ window.handleCheckout = async()=>{
     const snapshottedItems = getAllCartItems();
     const snapshottedTotal = getTotalPrice();
     const firstOrderId = generateOrderNumber();
-    // One order per vendor — mirrors index.html handleCheckout exactly
     const promises = Object.entries(cartGroups).map(async([gVid, group])=>{
       const sub = (group.items||[]).reduce((s,i)=>s+i.price*i.quantity, 0);
       const fee = parseFloat(group.deliveryFee||0);
@@ -1217,25 +1225,21 @@ window.handleCheckout = async()=>{
         deliveryLat: userLocation.lat,
         deliveryLng: userLocation.lng,
         status: 'pending',
-        orderType: 'grocery', // distinguishes grocery from restaurant orders
+        orderType: 'grocery',
         createdAt: timestamp,
         updatedAt: timestamp,
       };
-      // Shared key so both paths reference the same order record
       const newOrderRef = push(ref(db, 'orders'));
       const orderKey = newOrderRef.key;
-      // Write to global orders list AND vendor-specific orders node simultaneously
       return Promise.all([
         set(newOrderRef, orderData),
         set(ref(db, `vendors/${gVid}/orders/${orderKey}`), orderData)
       ]);
     });
     await Promise.all(promises);
-    // Clear cart from DB
     if(currentUserId){
       await set(ref(db, `carts/${currentUserId}`), {groups:{}, updatedAt: Date.now()});
     }
-    // Show success step
     coAnimDir = 'forward'; coStep = 2;
     const body = document.getElementById('coBody');
     const footer = document.getElementById('coFooter');
@@ -1249,7 +1253,6 @@ window.handleCheckout = async()=>{
     animateCoBody();
     renderCoSuccess(body, footer, snapshottedItems, snapshottedTotal, firstOrderId);
     lucide.createIcons();
-    // Clear local cart state
     cartGroups = {}; expandedGroups.clear(); updateCartUI();
     allProducts.forEach(p => refreshAction(p.id));
   } catch(e){
@@ -1360,15 +1363,6 @@ window.cQty = function(productId, delta, event){
   refreshAction(productId);
   showToast(`${p.name} ${delta>0?'added':'removed'}`);
 };
-/* ── HERO CYCLE ── */
-const HERO_EMOJIS = ['🛒','🥦','🥛','🥩','🍞','🧃','🍿','🧴','🌿','🍎'];
-let heroIdx = 0;
-setInterval(()=>{
-  heroIdx = (heroIdx+1) % HERO_EMOJIS.length;
-  const el = document.getElementById('heroEmoji'); if(!el) return;
-  el.style.transform = 'scale(0)';
-  setTimeout(()=>{ el.textContent = HERO_EMOJIS[heroIdx]; el.style.transform = 'scale(1)'; }, 180);
-}, 3000);
 /* ── LOAD PRODUCTS ── */
 const urlParams = new URLSearchParams(window.location.search);
 const vendorParam = urlParams.get('vendor');
@@ -1380,8 +1374,8 @@ function loadProducts(){
     if(!data){ finishLoad(); return; }
     if(vendorParam){
       if((data.storeType||'').toLowerCase() === 'grocery' && data.status === 'active'){
-        document.getElementById('storeBadge').textContent = data.name || 'Grocery';
-        document.getElementById('heroTitle').innerHTML = `${data.name||'Fresh Groceries'}<br>Delivered Fast`;
+        document.getElementById('storeBadge').innerHTML = `<i data-lucide="map-pin" style="width:10px;height:10px;"></i> ${data.name || 'Grocery Delivery'}`;
+        document.getElementById('heroTitle').innerHTML = `${data.name||'Fresh & Healthy'} <span>Groceries</span>`;
         activeVendorId = vendorParam;
         activeVendorName = data.name || 'Grocery Store';
         ingestMenu(vendorParam, data);
@@ -1701,11 +1695,11 @@ document.addEventListener('keydown', e=>{
 });
 /* ── SEARCH ── */
 window.toggleSearch = function(){
-  const sec = document.getElementById('searchSectionBar');
-  const hidden = sec.style.display === 'none' || !sec.style.display;
-  sec.style.display = hidden ? 'block' : 'none';
-  if(hidden) setTimeout(()=>document.getElementById('searchInput').focus(), 100);
-  else{ document.getElementById('searchInput').value = ''; handleSearch(''); }
+  const searchInput = document.getElementById('searchInput');
+  if(searchInput) {
+    searchInput.focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 };
 let searchTimer;
 window.handleSearch = function(q){
