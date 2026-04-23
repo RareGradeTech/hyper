@@ -38,7 +38,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 @keyframes coBack{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
 @keyframes scaleIn{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes ripple{0%{transform:scale(0);opacity:.4}100%{transform:scale(4);opacity:0}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes fadeSlideIn{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
 .shimmer-block{
   background:linear-gradient(90deg,var(--shimmer-base) 25%,var(--shimmer-highlight) 50%,var(--shimmer-base) 75%);
@@ -91,7 +91,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   border: 2px solid var(--surface); line-height: 1.2;
 }
 
-/* ── SEARCH (Always visible under header for better UX) ── */
+/* ── SEARCH ── */
 .search-section-bar {
   padding: 12px 16px; background: var(--surface);
   border-bottom: 1px solid var(--border-light);
@@ -113,10 +113,10 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 /* ── PAGE ── */
 .page{padding:0 0 130px}
 
-/* ── HERO BANNER (Dribbble Style) ── */
+/* ── HERO BANNER ── */
 .hero-wrapper { padding: 16px; }
 .hero {
-  background: #ecfdf5; /* Light pastel green */
+  background: #ecfdf5; 
   border-radius: 24px; padding: 28px 24px; position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: space-between;
   border: 1px solid #d1fae5;
@@ -144,16 +144,23 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .hero-btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
 .hero-btn i { width: 14px; height: 14px; }
 .hero-image-container { position: relative; z-index: 2; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.hero-emoji { font-size: 5.5rem; filter: drop-shadow(0 8px 16px rgba(0,0,0,.15)); transition: transform .4s cubic-bezier(.34,1.56,.64,1); line-height: 1; }
+.hero-logo-wrap {
+  width: 100px; height: 100px; border-radius: 20px;
+  background: white; padding: 5px; box-shadow: 0 12px 30px rgba(5, 150, 105, 0.15);
+  transform: rotate(5deg); animation: float 4s ease-in-out infinite;
+}
+.hero-logo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; }
 
 /* ── SECTIONS ── */
 .section{padding:20px 14px 0}
 .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.section-title{font-size:1rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
-.sec-icon{font-size:1.1rem}
+.section-title{font-size:1.05rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
+.sec-icon{color:var(--accent);display:flex;align-items:center;}
+.sec-icon i{width:18px;height:18px;stroke-width:2.5;}
 .item-count{font-size:.72rem;font-weight:700;color:var(--dim);background:var(--surface2);padding:3px 10px;border-radius:999px;border:1px solid var(--border)}
 .see-all{font-size:.76rem;font-weight:700;color:var(--accent);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:3px;padding:3px 7px;border-radius:7px;transition:var(--tr)}
 .see-all:hover{background:var(--accent-light);color:var(--accent-dark)}
+
 /* ── CATEGORY GRID ── */
 .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
 @media(min-width:420px){.cat-grid{grid-template-columns:repeat(4,1fr)}}
@@ -169,10 +176,13 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .cat-tile:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
 .cat-tile:active{transform:scale(.95)}
 .cat-tile.active{background:var(--accent);border-color:var(--accent);box-shadow:0 4px 16px rgba(5,150,105,.35)}
-.cat-tile.active .cat-icon-wrap{background:rgba(255,255,255,.2)!important}
+.cat-tile.active .cat-icon-wrap{background:rgba(255,255,255,.2)!important; color:white;}
+.cat-tile.active .cat-icon-wrap i{color:white;}
 .cat-tile.active .cat-label{color:white}
-.cat-icon-wrap{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.45rem;transition:var(--tr);flex-shrink:0}
+.cat-icon-wrap{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;transition:var(--tr);flex-shrink:0;color:var(--accent-dark);}
+.cat-icon-wrap i{width:22px;height:22px;stroke-width:2;}
 .cat-label{font-size:.62rem;font-weight:700;color:var(--text-secondary);text-align:center;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
 /* ── PRODUCT ROWS/GRIDS ── */
 .products-row{display:flex;gap:11px;overflow-x:auto;padding:4px 14px 14px}
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:11px;padding:0 14px}
@@ -194,7 +204,8 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 }
 .p-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform .3s ease}
 .product-card:hover .p-img-wrap img{transform:scale(1.07)}
-.p-no-img{font-size:2.6rem;opacity:.5;user-select:none;pointer-events:none}
+.p-no-img{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--accent);opacity:0.6;}
+.p-no-img i{width:40px;height:40px;stroke-width:1.5;}
 .p-badge{position:absolute;top:5px;left:5px;background:var(--accent);color:white;font-size:.56rem;font-weight:800;padding:2px 6px;border-radius:999px;text-transform:uppercase;letter-spacing:.3px}
 .p-badge.sale{background:var(--danger)}
 .p-badge.new-badge{background:var(--yellow);color:#451a03}
@@ -220,6 +231,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .qty-ctrl button:active{background:rgba(255,255,255,.2)}
 .qty-ctrl button i{width:11px;height:11px}
 .qty-num{color:white;font-weight:800;font-size:.72rem;min-width:16px;text-align:center}
+
 /* ── ITEM DETAIL SHEET ── */
 .item-backdrop{
   position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:3000;
@@ -258,7 +270,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .item-sheet-body::-webkit-scrollbar{display:none}
 .item-sheet-image-wrap{position:relative;width:100%;height:230px;overflow:hidden;flex-shrink:0;background:var(--surface2)}
 .item-sheet-image{width:100%;height:100%;object-fit:contain;display:block}
-.item-sheet-no-image{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:4rem}
+.item-sheet-no-image{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
 .item-sheet-badge{position:absolute;top:12px;left:12px;background:var(--accent);color:white;padding:4px 10px;border-radius:999px;font-size:.68rem;font-weight:700}
 .item-sheet-content{padding:16px 16px 0}
 .item-sheet-name{font-size:1.12rem;font-weight:800;letter-spacing:-.025em;line-height:1.2;margin-bottom:6px}
@@ -294,7 +306,8 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .sug-card:active{transform:scale(.96)}
 .sug-card-img-wrap{position:relative;width:100%;height:86px;overflow:hidden;background:var(--surface2)}
 .sug-card-img{width:100%;height:100%;object-fit:cover;display:block}
-.sug-card-no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.sug-card-no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--dim);opacity:0.5;}
+.sug-card-no-img i{width:28px;height:28px;}
 .sug-card-badge{position:absolute;top:5px;left:5px;padding:2px 6px;border-radius:999px;font-size:.52rem;font-weight:700;color:white;max-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sug-card-body{padding:6px 8px 8px}
 .sug-card-name{font-size:.7rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -311,6 +324,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .item-sheet-add-btn:disabled{background:var(--border);cursor:not-allowed;color:var(--dim)}
 .item-sheet-add-btn-left{display:flex;align-items:center;gap:8px}
 .item-sheet-add-btn-qty{background:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.35);width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;}
+
 /* ── TOAST ── */
 #toast{
   position:fixed;bottom:calc(70px + var(--safe));left:50%;
@@ -403,7 +417,8 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .checkout-btn:disabled{background:var(--border);cursor:not-allowed;color:var(--dim);transform:none;box-shadow:none;}
 .multi-restaurant-banner{background:#fff8e1;border:1px solid #ffe082;border-radius:var(--radius-xs);padding:9px 11px;font-size:0.73rem;font-weight:600;color:#7a5800;display:flex;align-items:flex-start;gap:7px;margin-bottom:2px;}
 .multi-restaurant-banner i{width:13px;height:13px;flex-shrink:0;margin-top:1px;color:#f59e0b;}
-/* ── CHECKOUT DRAWER (mirrors index.html exactly) ── */
+
+/* ── CHECKOUT DRAWER ── */
 @keyframes coStepSlideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
 @keyframes coStepSlideBack{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
 .checkout-drawer{position:absolute;inset:0;background:var(--bg);transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);display:flex;flex-direction:column;z-index:10;overflow:hidden;}
@@ -534,7 +549,9 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
           </button>
         </div>
         <div class="hero-image-container">
-          <div class="hero-emoji" id="heroEmoji">🛒</div>
+          <div class="hero-logo-wrap">
+            <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/473018911_1144016671071744_3535488847925097727_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_eui2=AeGUeW4OMbFgWIHsxc6MEbLfyVanQYIENhfJVqdBggQ2F129W_kY5E8R48hfaupj-VUCWW9pMizIpOYeN0vUh9Jn&_nc_ohc=1lRbXXsrtfAQ7kNvwFtvoR5&_nc_oc=Adrli0V2q-O-3UPm0F-1gYiFmGekmOt_tm7o-KvtBqA1QyvLWeDmxWgdzNPyK4QygxY&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=HkCyI20b8-O2ZffqF1z3KQ&oh=00_Af1X6wCxIbBM01jlybOyk4nobvtJlzL5So492N84cD3T2w&oe=69EFE9F3" alt="Store Logo Float">
+          </div>
         </div>
       </div>
     </div>
@@ -542,7 +559,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 
   <div class="section" id="catSection">
     <div class="section-head">
-      <div class="section-title"><span class="sec-icon">🏪</span> Shop by Category</div>
+      <div class="section-title"><span class="sec-icon"><i data-lucide="layout-grid"></i></span> Shop by Category</div>
       <button class="see-all" onclick="selectCat('all')">All <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></button>
     </div>
     <div class="cat-grid" id="catGrid">
@@ -558,7 +575,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   </div>
   <div class="section" id="popularSection" style="display:none;">
     <div class="section-head">
-      <div class="section-title"><span class="sec-icon">⭐</span> Popular Right Now</div>
+      <div class="section-title"><span class="sec-icon"><i data-lucide="star"></i></span> Popular Right Now</div>
     </div>
     <div class="products-row noscroll" id="popularRow">
       <div class="shimmer-block shimmer-card"></div>
@@ -569,13 +586,13 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   </div>
   <div class="section" id="searchSection2" style="display:none;">
     <div class="section-head">
-      <div class="section-title" id="searchTitle"><span class="sec-icon">🔍</span> Results</div>
+      <div class="section-title" id="searchTitle"><span class="sec-icon"><i data-lucide="search"></i></span> Results</div>
       <span class="item-count" id="searchCount">0 items</span>
     </div>
     <div class="products-grid" id="searchGrid"></div>
     <div id="searchEmpty" style="display:none;">
       <div style="text-align:center;padding:40px 20px;color:var(--dim);">
-        <div style="font-size:2.5rem;margin-bottom:10px;">🔍</div>
+        <i data-lucide="search-x" style="width:48px;height:48px;margin-bottom:10px;stroke-width:1.5;"></i>
         <h3 style="font-size:.9rem;font-weight:700;margin-bottom:4px;">Nothing found</h3>
         <p style="font-size:.78rem;">Try a different search or tap a category above</p>
       </div>
@@ -599,7 +616,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   </div>
   <div id="storeEmpty" style="display:none;">
     <div style="text-align:center;padding:40px 20px;color:var(--dim);">
-      <div style="font-size:2.5rem;margin-bottom:10px;">🛒</div>
+      <i data-lucide="store" style="width:48px;height:48px;margin-bottom:10px;stroke-width:1.5;"></i>
       <h3 style="font-size:.9rem;font-weight:700;margin-bottom:4px;">No products yet</h3>
       <p style="font-size:.78rem;">This grocery store is still adding products. Check back soon!</p>
     </div>
@@ -610,7 +627,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   <div class="sheet-drag-zone" id="sheetDragZone"><div class="sheet-handle"></div></div>
   <button class="item-sheet-close" onclick="closeItemSheet()" aria-label="Close"><i data-lucide="x"></i></button>
   <div class="item-sheet-image-wrap" id="itemSheetImageWrap">
-    <div class="item-sheet-no-image">🛒</div>
+    <div class="item-sheet-no-image"><i data-lucide="shopping-basket" style="width:64px;height:64px;color:var(--accent);"></i></div>
   </div>
   <div class="item-sheet-body" id="itemSheetBody">
     <div class="item-sheet-content">
@@ -720,22 +737,22 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoia2F0bGVnb3BoYXNoYSIsImEiOiJjbTlpOTdzbmYwMGNsMmpzYWJtZzN4d3pqIn0.Zt-aSMEoahrV3zkiVVHbOw';
-/* ── CATEGORIES ── */
+/* ── CATEGORIES (SVG ICONS) ── */
 const CATS = [
-  { key:'all', label:'All', emoji:'🛒', bg:'#f0fdf4', ib:'#bbf7d0' },
-  { key:'fresh', label:'Fresh & Veg', emoji:'🥦', bg:'#f0fdf4', ib:'#86efac' },
-  { key:'dairy', label:'Dairy & Eggs', emoji:'🥛', bg:'#eff6ff', ib:'#bfdbfe' },
-  { key:'meat', label:'Meat', emoji:'🥩', bg:'#fef2f2', ib:'#fecaca' },
-  { key:'bakery', label:'Bakery', emoji:'🍞', bg:'#fffbeb', ib:'#fde68a' },
-  { key:'beverages', label:'Drinks', emoji:'🧃', bg:'#eff6ff', ib:'#bfdbfe' },
-  { key:'snacks', label:'Snacks', emoji:'🍿', bg:'#fefce8', ib:'#fef08a' },
-  { key:'frozen', label:'Frozen', emoji:'🧊', bg:'#f0f9ff', ib:'#bae6fd' },
-  { key:'pantry', label:'Pantry', emoji:'🫙', bg:'#fdf4ff', ib:'#e9d5ff' },
-  { key:'household', label:'Cleaning', emoji:'🧹', bg:'#faf5ff', ib:'#ddd6fe' },
-  { key:'personal', label:'Personal Care', emoji:'🧴', bg:'#fff0f6', ib:'#fbcfe8' },
-  { key:'baby', label:'Baby', emoji:'🍼', bg:'#fff7ed', ib:'#fed7aa' },
-  { key:'stationery',label:'Stationery', emoji:'✏️', bg:'#f5f3ff', ib:'#ddd6fe' },
-  { key:'organic', label:'Organic', emoji:'🌿', bg:'#f0fdf4', ib:'#86efac' },
+  { key:'all', label:'All', icon:'layout-grid', bg:'#f0fdf4', ib:'#bbf7d0' },
+  { key:'fresh', label:'Fresh & Veg', icon:'leaf', bg:'#f0fdf4', ib:'#86efac' },
+  { key:'dairy', label:'Dairy & Eggs', icon:'milk', bg:'#eff6ff', ib:'#bfdbfe' },
+  { key:'meat', label:'Meat', icon:'drumstick', bg:'#fef2f2', ib:'#fecaca' },
+  { key:'bakery', label:'Bakery', icon:'croissant', bg:'#fffbeb', ib:'#fde68a' },
+  { key:'beverages', label:'Drinks', icon:'cup-soda', bg:'#eff6ff', ib:'#bfdbfe' },
+  { key:'snacks', label:'Snacks', icon:'cookie', bg:'#fefce8', ib:'#fef08a' },
+  { key:'frozen', label:'Frozen', icon:'snowflake', bg:'#f0f9ff', ib:'#bae6fd' },
+  { key:'pantry', label:'Pantry', icon:'archive', bg:'#fdf4ff', ib:'#e9d5ff' },
+  { key:'household', label:'Cleaning', icon:'spray-can', bg:'#faf5ff', ib:'#ddd6fe' },
+  { key:'personal', label:'Personal Care', icon:'sparkles', bg:'#fff0f6', ib:'#fbcfe8' },
+  { key:'baby', label:'Baby', icon:'baby', bg:'#fff7ed', ib:'#fed7aa' },
+  { key:'stationery',label:'Stationery', icon:'paperclip', bg:'#f5f3ff', ib:'#ddd6fe' },
+  { key:'organic', label:'Organic', icon:'sprout', bg:'#f0fdf4', ib:'#86efac' },
 ];
 const CAT_MAP = {
   'Fruits & Veg':'fresh','Fruits & Vegetables':'fresh','Produce':'fresh','Fresh':'fresh','Vegetables':'fresh','Fruit':'fresh',
@@ -754,7 +771,7 @@ const CAT_MAP = {
 };
 function getCatKey(c){ return CAT_MAP[c] || 'pantry'; }
 function getCatDef(k){ return CATS.find(c=>c.key===k) || CATS[0]; }
-function getEmoji(c){ return getCatDef(getCatKey(c)).emoji; }
+function getIcon(c){ return getCatDef(getCatKey(c)).icon; }
 const FRESH_KEYS = ['fresh','organic'];
 const DAIRY_KEYS = ['dairy','frozen'];
 function sugBucket(p){ const k=getCatKey(p.category); if(FRESH_KEYS.includes(k))return'fresh'; if(DAIRY_KEYS.includes(k))return'dairy'; return'other'; }
@@ -781,7 +798,7 @@ window.showToast = function(msg){
   t.textContent = msg; t.classList.add('show');
   clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), 2400);
 };
-/* ── ORDER NUMBER GENERATOR (matches index.html) ── */
+/* ── ORDER NUMBER GENERATOR ── */
 function generateOrderNumber(){
   const ts = Date.now().toString(36).toUpperCase();
   const rand = Math.random().toString(36).substring(2,5).toUpperCase();
@@ -941,7 +958,7 @@ window.toggleCart = ()=>{
     updateCartUI();
   }
 };
-/* ── CHECKOUT DRAWER (identical logic to index.html) ── */
+/* ── CHECKOUT DRAWER ── */
 window.openCheckoutDrawer = ()=>{
   if(getTotalItems() === 0) return;
   coStep = 0; selectedPayment = 'cash'; coDeliveryAddress = null; coAnimDir = 'forward';
@@ -1152,7 +1169,7 @@ function renderCoSuccess(body, footer, snapshottedItems, snapshottedTotal, snaps
   ).join('');
   body.innerHTML = `<div class="co-success">
     <div class="co-success-ring"><i data-lucide="check"></i></div>
-    <div class="co-success-title">Order Confirmed! 🛒</div>
+    <div class="co-success-title">Order Confirmed! <i data-lucide="party-popper" style="display:inline-block;vertical-align:middle;width:24px;height:24px;color:var(--accent);"></i></div>
     <div class="co-success-sub">Your grocery order has been placed.<br>The store is preparing your items.</div>
     <div class="co-success-id">Order ${snapshottedOrderId||'—'}</div>
     <div class="co-success-items">${rows}</div>
@@ -1426,7 +1443,7 @@ function buildCatGrid(){
   const grid = document.getElementById('catGrid');
   grid.innerHTML = CATS.filter(c=>keysWithProducts.has(c.key)).map(c=>`
     <div class="cat-tile ${activeCat===c.key?'active':''}" data-key="${c.key}" onclick="selectCat('${c.key}')">
-      <div class="cat-icon-wrap" style="background:${c.ib}">${c.emoji}</div>
+      <div class="cat-icon-wrap" style="background:${c.ib}"><i data-lucide="${c.icon}"></i></div>
       <div class="cat-label">${c.label}</div>
     </div>`).join('');
 }
@@ -1469,7 +1486,7 @@ function buildAisleRow(cat, products){
   const div = document.createElement('div');
   div.className = 'section';
   div.innerHTML = `<div class="section-head">
-    <div class="section-title"><span class="sec-icon">${cat.emoji}</span>${cat.label}</div>
+    <div class="section-title"><span class="sec-icon"><i data-lucide="${cat.icon}"></i></span>${cat.label}</div>
     <div style="display:flex;align-items:center;gap:8px;">
       <span class="item-count">${products.length}</span>
       <button class="see-all" onclick="selectCat('${cat.key}')">See all <i data-lucide="chevron-right" style="width:13px;height:13px;"></i></button>
@@ -1487,7 +1504,7 @@ function buildAisleGrid(cat, products){
   const div = document.createElement('div');
   div.className = 'section';
   div.innerHTML = `<div class="section-head">
-    <div class="section-title"><span class="sec-icon">${cat?.emoji||'🛒'}</span>${cat?.label||'Products'}</div>
+    <div class="section-title"><span class="sec-icon"><i data-lucide="${cat?.icon||'layout-grid'}"></i></span>${cat?.label||'Products'}</div>
     <span class="item-count">${products.length} items</span>
   </div>
   <div class="products-grid" id="agrid-${cat?.key}"></div>`;
@@ -1509,11 +1526,11 @@ function buildCard(product, flex=true){
   const imgH = product.imageURL
     ? `<img src="${product.imageURL}" alt="${product.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : '';
-  const phH = `<div class="p-no-img" ${product.imageURL?'style="display:none;"':''}>${getEmoji(product.category)}</div>`;
+  const phH = `<div class="p-no-img" ${product.imageURL?'style="display:none;"':''}><i data-lucide="${getIcon(product.category)}"></i></div>`;
   let badge = '';
   if(product.originalPrice && product.originalPrice > product.price) badge = '<div class="p-badge sale">SALE</div>';
   else if(product.isNew) badge = '<div class="p-badge new-badge">NEW</div>';
-  else if(product.featured) badge = '<div class="p-badge">⭐ Top</div>';
+  else if(product.featured) badge = '<div class="p-badge"><i data-lucide="star" style="width:10px;height:10px;display:inline-block;vertical-align:text-top;margin-right:2px;fill:currentColor;"></i> Top</div>';
   const unavailBadge = unavail ? '<div class="p-unavail-badge">Unavailable</div>' : '';
   const oldH = (product.originalPrice && product.originalPrice > product.price)
     ? `<div class="p-price-old">R${product.originalPrice.toFixed(2)}</div>` : '';
@@ -1544,12 +1561,12 @@ window.openItemSheet = function(productId){
   const imgWrap = document.getElementById('itemSheetImageWrap');
   if(product.imageURL){
     imgWrap.innerHTML = `<img class="item-sheet-image" src="${product.imageURL}" alt="${product.name}">
-      ${product.featured?'<span class="item-sheet-badge">⭐ Popular</span>':''}
+      ${product.featured?'<span class="item-sheet-badge"><i data-lucide="star" style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-right:3px;fill:currentColor;"></i> Popular</span>':''}
       ${product.isNew?'<span class="item-sheet-badge" style="background:var(--yellow);color:#451a03;">NEW</span>':''}`;
   } else {
     const cat = getCatDef(getCatKey(product.category));
-    imgWrap.innerHTML = `<div class="item-sheet-no-image" style="background:${cat.bg};">${cat.emoji}</div>
-      ${product.featured?'<span class="item-sheet-badge">⭐ Popular</span>':''}`;
+    imgWrap.innerHTML = `<div class="item-sheet-no-image" style="background:${cat.bg};"><i data-lucide="${cat.icon}" style="width:64px;height:64px;color:${cat.ib};"></i></div>
+      ${product.featured?'<span class="item-sheet-badge"><i data-lucide="star" style="width:10px;height:10px;display:inline-block;vertical-align:middle;margin-right:3px;fill:currentColor;"></i> Popular</span>':''}`;
   }
   document.getElementById('itemSheetName').textContent = product.name;
   const descEl = document.getElementById('itemSheetDesc');
@@ -1619,7 +1636,7 @@ function sugCard(product){
   const color = BUCKET_COLOR[sugBucket(product)];
   const imgContent = product.imageURL
     ? `<img class="sug-card-img" src="${product.imageURL}" alt="${product.name}" loading="lazy">`
-    : `<div class="sug-card-no-img">${catDef.emoji}</div>`;
+    : `<div class="sug-card-no-img"><i data-lucide="${catDef.icon}"></i></div>`;
   return `<div class="sug-card" onclick="openItemSheet('${product.id}')">
     <div class="sug-card-img-wrap">${imgContent}<span class="sug-card-badge" style="background:${color};">${product.category}</span></div>
     <div class="sug-card-body">
@@ -1723,7 +1740,7 @@ window.handleSearch = function(q){
     document.getElementById('aisleContainer').style.display = 'none';
     document.getElementById('popularSection').style.display = 'none';
     document.getElementById('catSection').style.display = 'none';
-    document.getElementById('searchTitle').innerHTML = `<span class="sec-icon">🔍</span> Results for "${q}"`;
+    document.getElementById('searchTitle').innerHTML = `<span class="sec-icon"><i data-lucide="search"></i></span> Results for "${q}"`;
     document.getElementById('searchCount').textContent = `${results.length} items`;
     const grid = document.getElementById('searchGrid');
     const empty = document.getElementById('searchEmpty');
