@@ -31,15 +31,10 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes popIn{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
 @keyframes successPop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes coIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
-@keyframes coBack{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
-@keyframes scaleIn{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes ripple{0%{transform:scale(0);opacity:.4}100%{transform:scale(4);opacity:0}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes fadeSlideIn{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+
 .shimmer-block{
   background:linear-gradient(90deg,var(--shimmer-base) 25%,var(--shimmer-highlight) 50%,var(--shimmer-base) 75%);
   background-size:800px 100%;animation:shimmer 1.4s infinite;border-radius:10px;
@@ -56,15 +51,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   border-bottom: 1px solid var(--border-light); gap: 12px;
 }
 .header-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-.back-btn {
-  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-  background: var(--surface2); border: 1px solid var(--border-light); border-radius: 50%;
-  cursor: pointer; color: var(--text); flex-shrink: 0; transition: var(--tr); text-decoration: none;
-}
-.back-btn:hover { background: var(--border-light); }
-.back-btn:active { transform: scale(.9); }
-.back-btn i { width: 18px; height: 18px; }
-.logo { height: 38px; width: auto; object-fit: contain; display: block; border-radius: 8px; }
+.logo { height: 42px; width: auto; object-fit: contain; display: block; border-radius: 8px; }
 .header-title {
   font-weight: 800; font-size: 1.05rem; color: var(--text);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -91,14 +78,15 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   border: 2px solid var(--surface); line-height: 1.2;
 }
 
-/* ── SEARCH ── */
+/* ── SEARCH & FILTER ROW ── */
 .search-section-bar {
   padding: 12px 16px; background: var(--surface);
   border-bottom: 1px solid var(--border-light);
   position: sticky; top: 72px; z-index: 999;
 }
+.search-filter-row { display: flex; gap: 10px; width: 100%; align-items: center; }
 .search-wrap {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 10px; flex: 1;
   background: var(--surface2); border-radius: var(--radius-sm);
   padding: 12px 14px; border: 1px solid transparent; transition: var(--tr);
 }
@@ -110,10 +98,38 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .search-input { flex: 1; border: none; background: transparent; font-family: inherit; font-size: .9rem; color: var(--text); outline: none; font-weight: 500; }
 .search-input::placeholder { color: #9ca3af; font-weight: 400; }
 
+/* Filter Dropdown */
+.filter-dropdown-wrap { position: relative; flex-shrink: 0; }
+.filter-btn {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface2); border: 1px solid var(--border-light);
+  width: 46px; height: 46px; border-radius: var(--radius-sm);
+  color: var(--text); cursor: pointer; transition: var(--tr);
+}
+.filter-btn:hover { background: var(--accent-light); color: var(--accent-dark); border-color: transparent; }
+.filter-btn:active { transform: scale(0.95); }
+.filter-btn i { width: 20px; height: 20px; }
+.filter-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  width: 220px; max-height: 320px; overflow-y: auto;
+  background: var(--surface); border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
+  opacity: 0; visibility: hidden; transform: translateY(-10px);
+  transition: var(--tr); z-index: 2000; padding: 6px;
+}
+.filter-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.filter-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+  font-size: .85rem; font-weight: 600; color: var(--text-secondary);
+  border-radius: var(--radius-xs); cursor: pointer; transition: var(--tr);
+}
+.filter-item:hover, .filter-item.active { background: var(--accent-light); color: var(--accent-dark); }
+.filter-item i { width: 16px; height: 16px; }
+
 /* ── PAGE ── */
 .page{padding:0 0 130px}
 
-/* ── HERO BANNER ── */
+/* ── HERO BANNER & CAROUSEL ── */
 .hero-wrapper { padding: 16px; }
 .hero {
   background: #ecfdf5; 
@@ -143,13 +159,23 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 }
 .hero-btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
 .hero-btn i { width: 14px; height: 14px; }
+
+/* Animated Slider CSS */
 .hero-image-container { position: relative; z-index: 2; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.hero-logo-wrap {
-  width: 100px; height: 100px; border-radius: 20px;
-  background: white; padding: 5px; box-shadow: 0 12px 30px rgba(5, 150, 105, 0.15);
-  transform: rotate(5deg); animation: float 4s ease-in-out infinite;
+.hero-carousel {
+  width: 110px; height: 110px; border-radius: 20px;
+  background: white; padding: 4px; box-shadow: 0 12px 30px rgba(5, 150, 105, 0.15);
+  transform: rotate(5deg); position: relative;
+  animation: float 4s ease-in-out infinite;
 }
-.hero-logo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; }
+.hero-carousel-inner {
+  width: 100%; height: 100%; border-radius: 16px; position: relative; overflow: hidden; background: var(--surface2);
+}
+.c-slide {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 0.8s ease-in-out, transform 3s ease; transform: scale(1.15);
+}
+.c-slide.active { opacity: 1; transform: scale(1); z-index: 2; }
 
 /* ── SECTIONS ── */
 .section{padding:20px 14px 0}
@@ -336,6 +362,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:90vw;text-align:center;
 }
 #toast.show{transform:translateX(-50%) translateY(0)}
+
 /* ── FLOATING CART BAR ── */
 .floating-cart-bar{
   position:fixed;bottom:0;left:0;right:0;z-index:1500;
@@ -354,6 +381,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 .fcr{display:flex;align-items:center;gap:4px}
 .fc-total{font-weight:800;font-size:.86rem}
 .fc-arr{width:15px;height:15px;opacity:.85}
+
 /* ── CART OVERLAY + DRAWER ── */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1999;opacity:0;visibility:hidden;transition:var(--tr);}
 .cart-overlay.open{opacity:1;visibility:visible;}
@@ -508,9 +536,6 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 
 <header class="header">
   <div class="header-left">
-    <a href="index.html" class="back-btn" aria-label="Go back">
-      <i data-lucide="arrow-left"></i>
-    </a>
     <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/473018911_1144016671071744_3535488847925097727_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_eui2=AeGUeW4OMbFgWIHsxc6MEbLfyVanQYIENhfJVqdBggQ2F129W_kY5E8R48hfaupj-VUCWW9pMizIpOYeN0vUh9Jn&_nc_ohc=1lRbXXsrtfAQ7kNvwFtvoR5&_nc_oc=Adrli0V2q-O-3UPm0F-1gYiFmGekmOt_tm7o-KvtBqA1QyvLWeDmxWgdzNPyK4QygxY&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=HkCyI20b8-O2ZffqF1z3KQ&oh=00_Af1X6wCxIbBM01jlybOyk4nobvtJlzL5So492N84cD3T2w&oe=69EFE9F3" alt="Store Logo" class="logo">
     <div class="header-title">
       1BUSKET
@@ -526,11 +551,20 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 </header>
 
 <div class="search-section-bar" id="searchSectionBar">
-  <div class="search-wrap">
-    <i data-lucide="search"></i>
-    <input type="text" class="search-input" id="searchInput"
-           placeholder="Search fresh groceries, brands..."
-           autocomplete="off" oninput="handleSearch(this.value)">
+  <div class="search-filter-row">
+    <div class="search-wrap">
+      <i data-lucide="search"></i>
+      <input type="text" class="search-input" id="searchInput"
+             placeholder="Search fresh groceries, brands..."
+             autocomplete="off" oninput="handleSearch(this.value)">
+    </div>
+    <div class="filter-dropdown-wrap" id="filterDropdownWrap">
+      <button class="filter-btn" onclick="toggleFilterMenu(event)">
+        <i data-lucide="sliders-horizontal"></i>
+      </button>
+      <div class="filter-menu" id="filterMenu">
+        </div>
+    </div>
   </div>
 </div>
 
@@ -549,8 +583,12 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
           </button>
         </div>
         <div class="hero-image-container">
-          <div class="hero-logo-wrap">
-            <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/473018911_1144016671071744_3535488847925097727_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=1d70fc&_nc_eui2=AeGUeW4OMbFgWIHsxc6MEbLfyVanQYIENhfJVqdBggQ2F129W_kY5E8R48hfaupj-VUCWW9pMizIpOYeN0vUh9Jn&_nc_ohc=1lRbXXsrtfAQ7kNvwFtvoR5&_nc_oc=Adrli0V2q-O-3UPm0F-1gYiFmGekmOt_tm7o-KvtBqA1QyvLWeDmxWgdzNPyK4QygxY&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=HkCyI20b8-O2ZffqF1z3KQ&oh=00_Af1X6wCxIbBM01jlybOyk4nobvtJlzL5So492N84cD3T2w&oe=69EFE9F3" alt="Store Logo Float">
+          <div class="hero-carousel">
+            <div class="hero-carousel-inner" id="heroCarousel">
+              <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=300&q=80" class="c-slide active">
+              <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?auto=format&fit=crop&w=300&q=80" class="c-slide">
+              <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=300&q=80" class="c-slide">
+            </div>
           </div>
         </div>
       </div>
@@ -720,6 +758,7 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
   </div>
 </div>
 <div id="toast">Item added</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue, set, push, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -737,9 +776,10 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
 const MAPBOX_TOKEN = 'pk.eyJ1Ijoia2F0bGVnb3BoYXNoYSIsImEiOiJjbTlpOTdzbmYwMGNsMmpzYWJtZzN4d3pqIn0.Zt-aSMEoahrV3zkiVVHbOw';
+
 /* ── CATEGORIES (SVG ICONS) ── */
 const CATS = [
-  { key:'all', label:'All', icon:'layout-grid', bg:'#f0fdf4', ib:'#bbf7d0' },
+  { key:'all', label:'All Categories', icon:'layout-grid', bg:'#f0fdf4', ib:'#bbf7d0' },
   { key:'fresh', label:'Fresh & Veg', icon:'leaf', bg:'#f0fdf4', ib:'#86efac' },
   { key:'dairy', label:'Dairy & Eggs', icon:'milk', bg:'#eff6ff', ib:'#bfdbfe' },
   { key:'meat', label:'Meat', icon:'drumstick', bg:'#fef2f2', ib:'#fecaca' },
@@ -776,6 +816,7 @@ const FRESH_KEYS = ['fresh','organic'];
 const DAIRY_KEYS = ['dairy','frozen'];
 function sugBucket(p){ const k=getCatKey(p.category); if(FRESH_KEYS.includes(k))return'fresh'; if(DAIRY_KEYS.includes(k))return'dairy'; return'other'; }
 function shuffle(arr){ return [...arr].sort(()=>Math.random()-.5); }
+
 /* ── STATE ── */
 let allProducts = [];
 let cartGroups = {};
@@ -792,19 +833,65 @@ let coStep = 0;
 let selectedPayment = 'cash';
 let coDeliveryAddress = null;
 let coAnimDir = 'forward';
-/* ── TOAST ── */
+
+/* ── UI INITS ── */
 window.showToast = function(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), 2400);
 };
-/* ── ORDER NUMBER GENERATOR ── */
+
+/* ── CAROUSEL LOGIC ── */
+(function initCarousel(){
+  const slides = document.querySelectorAll('.c-slide');
+  if(!slides.length) return;
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 3000); // changes every 3 seconds
+})();
+
+/* ── DROPDOWN FILTER LOGIC ── */
+window.toggleFilterMenu = function(e){
+  e.stopPropagation();
+  document.getElementById('filterMenu').classList.toggle('show');
+};
+window.closeFilterMenu = function(){
+  const menu = document.getElementById('filterMenu');
+  if(menu) menu.classList.remove('show');
+};
+document.addEventListener('click', (e) => {
+  const wrap = document.getElementById('filterDropdownWrap');
+  if(wrap && !wrap.contains(e.target)){
+    closeFilterMenu();
+  }
+});
+
+function buildFilterMenu(){
+  const menu = document.getElementById('filterMenu');
+  const keysWithProducts = new Set(['all']);
+  allProducts.forEach(p => keysWithProducts.add(getCatKey(p.category)));
+
+  let html = '';
+  CATS.filter(c => keysWithProducts.has(c.key)).forEach(c => {
+    html += `<div class="filter-item ${activeCat===c.key?'active':''}" data-key="${c.key}" onclick="selectCat('${c.key}'); closeFilterMenu();">
+      <i data-lucide="${c.icon}"></i> ${c.label}
+    </div>`;
+  });
+  menu.innerHTML = html;
+  lucide.createIcons();
+}
+
+/* ── ORDER GENERATOR ── */
 function generateOrderNumber(){
   const ts = Date.now().toString(36).toUpperCase();
   const rand = Math.random().toString(36).substring(2,5).toUpperCase();
   return `VYX-${ts}-${rand}`;
 }
-/* ── CART HELPERS ── */
+
+/* ── CART LOGIC ── */
 async function saveCart(){
   if(!currentUserId) return;
   try{ await set(ref(db,`carts/${currentUserId}`), {groups: JSON.parse(JSON.stringify(cartGroups)), updatedAt: Date.now()}); }
@@ -824,7 +911,7 @@ function getTotalPrice(){
     return s + sub + parseFloat(g.deliveryFee||0);
   }, 0);
 }
-/* ── CART UI ── */
+
 function updateCartUI(){
   const body = document.getElementById('cartBody');
   const countEl = document.getElementById('cartCount');
@@ -958,6 +1045,7 @@ window.toggleCart = ()=>{
     updateCartUI();
   }
 };
+
 /* ── CHECKOUT DRAWER ── */
 window.openCheckoutDrawer = ()=>{
   if(getTotalItems() === 0) return;
@@ -1434,7 +1522,11 @@ function ingestMenu(vid, v){
 function finishLoad(){
   document.getElementById('loadingShimmer').style.display = 'none';
   if(!allProducts.length){ document.getElementById('storeEmpty').style.display = 'block'; return; }
-  buildCatGrid(); renderPopular(); renderAisles('all');
+  
+  buildCatGrid(); 
+  buildFilterMenu(); // Initialize the custom dropdown 
+  renderPopular(); 
+  renderAisles('all');
   allProducts.forEach(p => refreshAction(p.id));
 }
 function buildCatGrid(){
@@ -1449,7 +1541,10 @@ function buildCatGrid(){
 }
 window.selectCat = function(key){
   activeCat = key;
+  // Update UI indicators
   document.querySelectorAll('.cat-tile').forEach(t=>t.classList.toggle('active', t.dataset.key===key));
+  document.querySelectorAll('.filter-item').forEach(t=>t.classList.toggle('active', t.dataset.key===key));
+  
   document.getElementById('searchSection2').style.display = 'none';
   document.getElementById('aisleContainer').style.display = '';
   document.getElementById('popularSection').style.display = allProducts.some(p=>p.featured) ? '' : 'none';
